@@ -10,6 +10,7 @@ import ViewDonor from './components/ViewDonor';
 import HospitalProfile from './components/HospitalProfile';
 import Reports from './components/Reports';
 import Notifications from './components/Notifications';
+import AddOrgan from './components/AddOrgan';
 function App()
 {
   return <>
@@ -22,7 +23,9 @@ function App()
           <Route path='searchOrgan' element={<SearchOrgan />}></Route>
           <Route path='registerDonor' element={<RegisterDonor />}></Route>
           <Route path='registerrecipient' element={<RegisterRecipient />}></Route>
-          <Route path='viewDonor' element={<ViewDonor />}></Route>
+          <Route path='viewDonor' element={<ViewDonor />}>
+          </Route>
+            <Route path='organ' element={<AddOrgan/>}></Route>
           <Route path='report' element={<Reports />}></Route>
           <Route path='notification' element={<Notifications />}></Route>
           <Route path='HospitalProfile' element={<HospitalProfile/>}></Route>

@@ -15,7 +15,7 @@ const Sidebar = () => {
 				<img src={logo} alt="" srcset="" className="w-40 h-full" />
 			</div>
 			<div>
-				<ul className="space-y-2 w-full pl-5">
+				<ul className="space-y-2 w-full pl-5 font-poppins" >
 					<li className="w-full hover:text-black hover:bg-white ">
 						<NavLink
 							to="/app/home"

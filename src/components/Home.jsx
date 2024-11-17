@@ -3,10 +3,14 @@ import donor from '../assets/donor.png';
 import recipient from '../assets/recipient.png';
 import hospital from '../assets/hospital.png';
 import organ from '../assets/organ1.png';
+import {useSelector} from 'react-redux'
 export default function Home() {
+    
+    
+    
 	return (
 		<div className="w-full h-full bg-blue-100 flex justify-center items-center">
-			<div className="w-[90%] h-[90%] bg-white  rounded-2xl flex justify-center items-center space-x-10">
+			<div className="w-[99%] h-[95%] bg-white  rounded-2xl flex justify-center items-center space-x-10">
 				<div className="w-56 h-40 shadow-2xl bg-blue-100 flex flex-col  items-center rounded-md pt-2">
 					
                     <div className="font-bold text-2xl ">Total Donor's</div>

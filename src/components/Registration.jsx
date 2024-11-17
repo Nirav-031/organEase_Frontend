@@ -1,6 +1,9 @@
 import { useFormik } from "formik";
 import { registrationSchema } from "../schemas";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Registration() {
 	const initialValues = {
 		name: "",
@@ -13,12 +16,43 @@ function Registration() {
 		password: "",
 		confirm_password: "",
 	};
+	// console.log(process.env.REACT_APP_API_URL);
+	const navigate = useNavigate();
+	const successToast = () => {
+		return toast.success("Registration SuccessFully", {
+			position: "top-center",
+		});
+	};
+	const errorToast = (err) => {
+		return toast.error(err,{ position: "top-right"})
+	};
+	const registrationApiCalling = (data) => {
+		const url = import.meta.env.VITE_API_URL;
+
+		axios
+			.post(`${url}/register/`, {
+				...data,
+				hospital_name: data.name,
+				mobile_number: data.mono,
+			})
+			.then((res) => {
+				console.log(res);
+				
+				Promise.all([successToast(),setTimeout(()=>navigate("/"),2000)])
+				
+			})
+			.catch((err) => {
+				errorToast(err.response.data.email[0]);
+				console.error(err.response.data.email[0]);
+			});
+	};
 
 	const { values, handleSubmit, errors, handleChange } = useFormik({
 		initialValues,
 		validationSchema: registrationSchema,
 		onSubmit: function (values) {
 			console.log(values);
+			registrationApiCalling(values);
 		},
 	});
 	return (
@@ -69,7 +103,7 @@ function Registration() {
 											name="name"
 											onChange={handleChange}
 											value={values.name}
-											id="default-input"
+											id="default-input1"
 											className="bg-gray-50 border border-gray-300
                                      text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
                                      block w-full p-2.5 "
@@ -80,14 +114,14 @@ function Registration() {
 									</div>
 									<div className="mb-3">
 										<label
-											htmlFor="default-input"
+											htmlFor="default-input2"
 											className="block mb-2 text-sm font-medium text-gray-900 ">
 											Hospital Email
 										</label>
 										<input
 											type="email"
 											name="email"
-											id="default-input"
+											id="default-input3"
 											onChange={handleChange}
 											value={values.email}
 											className="bg-gray-50 border border-gray-300
@@ -101,7 +135,7 @@ function Registration() {
 									<div className="mb-3 flex justify-between">
 										<div>
 											<label
-												htmlFor="default-input"
+												htmlFor="default-input4"
 												className="block mb-2 text-sm font-medium text-gray-900 ">
 												Area
 											</label>
@@ -110,7 +144,7 @@ function Registration() {
 												name="area"
 												onChange={handleChange}
 												value={values.area}
-												id="default-input"
+												id="default-input5"
 												className="bg-gray-50 border border-gray-300
                                         text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
                                         block w-full p-2.5 "
@@ -121,7 +155,7 @@ function Registration() {
 										</div>
 										<div>
 											<label
-												htmlFor="default-input"
+												htmlFor="default-input6"
 												className="block mb-2 text-sm font-medium text-gray-900 ">
 												City
 											</label>
@@ -130,7 +164,7 @@ function Registration() {
 												name="city"
 												onChange={handleChange}
 												value={values.city}
-												id="default-input"
+												id="default-input7"
 												className="bg-gray-50 border border-gray-300
                                         text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
                                         block w-full p-2.5 "
@@ -143,7 +177,7 @@ function Registration() {
 									<div className="mb-3 flex justify-between">
 										<div>
 											<label
-												htmlFor="default-input"
+												htmlFor="default-input8"
 												className="block mb-2 text-sm font-medium text-gray-900 ">
 												State
 											</label>
@@ -152,7 +186,7 @@ function Registration() {
 												name="state"
 												onChange={handleChange}
 												value={values.state}
-												id="default-input"
+												id="default-input9"
 												className="bg-gray-50 border border-gray-300
                                         text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
                                         block w-full p-2.5 "
@@ -163,7 +197,7 @@ function Registration() {
 										</div>
 										<div>
 											<label
-												htmlFor="default-input"
+												htmlFor="default-input10"
 												className="block mb-2 text-sm font-medium text-gray-900 ">
 												Pincode
 											</label>
@@ -172,7 +206,7 @@ function Registration() {
 												name="pincode"
 												onChange={handleChange}
 												value={values.pincode}
-												id="default-input"
+												id="default-input11"
 												className="bg-gray-50 border border-gray-300
                                         text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
                                         block w-full p-2.5 "
@@ -184,7 +218,7 @@ function Registration() {
 									</div>
 									<div className="mb-3">
 										<label
-											htmlFor="default-input"
+											htmlFor="default-input12"
 											className="block mb-2 text-sm font-medium text-gray-900 ">
 											Mobile Number
 										</label>
@@ -193,7 +227,7 @@ function Registration() {
 											name="mono"
 											onChange={handleChange}
 											value={values.mono}
-											id="default-input"
+											id="default-input13"
 											className="bg-gray-50 border border-gray-300
                                      text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
                                      block w-full p-2.5 "
@@ -205,7 +239,7 @@ function Registration() {
 									<div className="mb-3 flex justify-between">
 										<div>
 											<label
-												htmlFor="default-input"
+												htmlFor="default-input14"
 												className="block mb-2 text-sm font-medium text-gray-900 ">
 												Password
 											</label>
@@ -214,7 +248,7 @@ function Registration() {
 												name="password"
 												onChange={handleChange}
 												value={values.password}
-												id="default-input"
+												id="default-input15"
 												className="bg-gray-50 border border-gray-300
                                         text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
                                         block w-full p-2.5 "
@@ -225,7 +259,7 @@ function Registration() {
 										</div>
 										<div>
 											<label
-												htmlFor="default-input"
+												htmlFor="default-input16"
 												className="block mb-2 text-sm font-medium text-gray-900 ">
 												Confirm Password
 											</label>
@@ -234,7 +268,7 @@ function Registration() {
 												onChange={handleChange}
 												value={values.confirm_password}
 												name="confirm_password"
-												id="default-input"
+												id="default-input17"
 												className="bg-gray-50 border border-gray-300
                                         text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
                                         block w-full p-2.5 "
@@ -262,6 +296,7 @@ function Registration() {
 						</div>
 					</div>
 				</div>
+						<ToastContainer />
 			</div>
 		</>
 	);

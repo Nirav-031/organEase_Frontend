@@ -5,9 +5,10 @@ import './index.css';
 import Login from './components/Login.jsx';
 import Registration from './components/Registration.jsx';
 import Dashboard from './components/Dashboard.jsx';
-
+import { Provider } from 'react-redux';
+import { store } from './reduxStore/store.js';
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <Provider store={store}>
     <App />
-  </StrictMode>
+  </Provider>
 )
